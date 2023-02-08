@@ -11,10 +11,14 @@
 {% for quote in quotes_db %}
 
     <div class="card">
-      <h5 class="card-header">&#129504;</h5>
+      <h5 class="card-header">&#128173;</h5>
       <div class="card-body">
         <a class="nav-link active" aria-current="page" href="{% url 'app_quotes:author_s' author_here=quote.author_id %}"><h5>{{quote.author_id}}</h5></a>
         <p class="card-text">{{quote.quote}}</p>
+        {% for tag in quote.tags %}
+        <button type="button" class="btn btn-outline-info">{{tag}}</button>
+        {% endfor %}
+
 
       </div>
     </div>
