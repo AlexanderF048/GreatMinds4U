@@ -8,6 +8,10 @@ packages = [{include = "web_hw_10"}]
 
 [tool.poetry.dependencies]
 python = "^3.11"
+django = "^4.1.6"
+psycopg2 = "^2.9.5"
+sqlalchemy = "^2.0.1"
+pillow = "^9.4.0"
 
 
 [build-system]

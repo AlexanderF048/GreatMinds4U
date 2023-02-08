@@ -1,0 +1,20 @@
+{% extends "app_quotes/base.html" %}
+
+{% block content %}
+<div class="container-fluid">
+    <h1 class="card-title">&#128101; Author info:</h1>
+</div>
+
+<div class="container-fluid">
+    <div class="card" style="width: 60rem;">
+      <div class="card-body">
+        <h5 class="card-title">{{author.fullname}}</h5>
+        <h7 class="card-subtitle mb-2 text-muted">{{author.born_date}}</h7>
+        <h7 class="card-subtitle mb-2 text-muted">{{author.born_location}}</h7>
+        <p class="card-text">{{author.description}}</p>
+      </div>
+    </div>
+</div>
+
+
+{% endblock %}

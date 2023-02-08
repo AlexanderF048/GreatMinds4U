@@ -1,0 +1,24 @@
+{% extends "app_quotes/base.html" %}
+
+{% block content %}
+
+
+<div class="container-fluid">
+    <h1 class="card-title">&#129504; Quotes:</h1>
+</div>
+
+<div class="d-flex flex-column mb-3">
+{% for quote in quotes_db %}
+
+    <div class="card">
+      <h5 class="card-header">&#129504;</h5>
+      <div class="card-body">
+        <a class="nav-link active" aria-current="page" href="{% url 'app_quotes:author_s' author_here=quote.author_id %}"><h5>{{quote.author_id}}</h5></a>
+        <p class="card-text">{{quote.quote}}</p>
+
+      </div>
+    </div>
+
+{% endfor %}
+</div>
+{% endblock %}
