@@ -1,0 +1,33 @@
+{% extends "app_quotes/base.html" %}
+
+{% block content %}
+
+<div class="container">
+
+
+<form method="POST" action="{% url 'app_quotes:add_quote'%}">
+    {% csrf_token %}
+    <div style="padding: 10px">
+        <label>Enter tags one or several, trough the come:{{form.tags}}</label>
+
+        <span>{{ form.errors.tags }}</span>
+    </div>
+
+    <div style="padding: 10px">
+        <label>Enter author`s fullname:{{form.author}}</label>
+        <span>{{ form.errors.author }}</span>
+    </div>
+
+    <div style="padding: 10px">
+        <label>Enter quote text (5000 symbols max.):{{form.quote}} </label>
+        <span>{{ form.errors.quote }}</span>
+    </div>
+
+
+    <div class="grid">
+        <button type="submit">Submit</button>
+        <button type="reset" class="secondary">Reset</button>
+    </div>
+</form>
+
+{% endblock %}

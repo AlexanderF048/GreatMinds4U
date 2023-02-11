@@ -1,4 +1,10 @@
-from django.shortcuts import render, get_object_or_404
+from django import template
+from django.contrib.auth.decorators import login_required
+from django.http import HttpResponse
+from django.shortcuts import render, get_object_or_404, redirect
+from django.template import loader
+
+from .forms import FormQuote
 from .models import Authors, Quotes
 
 
@@ -18,8 +24,35 @@ def def_authors(request):
 
 
 def def_author_single(request, author_here):
-    #author = Authors.objects.filter(fullname=author_here).first()
-    #author = Authors.objects.get(fullname=author_id)
+    # author = Authors.objects.filter(fullname=author_here).first()
+    # author = Authors.objects.get(fullname=author_id)
     author = get_object_or_404(Authors, pk=author_here)
 
     return render(request, 'app_quotes/author_single.html', context={"author": author})
+
+
+def def_tag_clic(request, recived_tag):
+    quotes_w_tag = Quotes.objects.filter(tags__contains=[str(recived_tag)])
+    # quotes_w_tag = str(recived_tag)
+    return render(request, 'app_quotes/quote_by_tag.html', context={'quotes_w_tag': quotes_w_tag})
+
+
+@login_required
+def def_add_quote(request):
+    if request.method == 'POST':
+        data_form = FormQuote(request.POST)
+
+        if data_form.is_valid():
+            new_quote = data_form.save()
+            new_quote.author.add(data_form.author)
+
+
+
+            parce_tags = data_form.tags.split(",", 3)
+            new_quote.tags.add(parce_tags)
+
+            return redirect(to='app_quotes:main')
+        else:
+            return render(request, 'app_quotes/add_quote.html', {'form': data_form})
+
+    return render(request, 'app_quotes/add_quote.html', {'form': FormQuote()})

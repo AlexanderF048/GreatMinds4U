@@ -1,14 +1,14 @@
 {% extends "app_quotes/base.html" %}
 
 {% block content %}
-<div class="container-fluid">
+<div class="container-fluid ">
     <h1 class="card-title">&#128101; All authors in postgres database:</h1>
 </div>
 
-
+<div class="d-flex align-content-stretch flex-wrap grid gap-5">
 {% for author in authors_db %}
-<div class="d-flex align-content-stretch flex-wrap">
-    <div class="card" style="width: 18rem;">
+<div class="d-flex align-content-stretch flex-wrap shadow-sm p-2 mb-1 bg-body-tertiary rounded">
+    <div class="card" style="width: 18rem ;">
       <div class="card-body">
         <h5 class="card-title">{{author.fullname}}</h5>
         <h7 class="card-subtitle mb-2 text-muted">{{author.born_date}}</h7>
@@ -18,5 +18,5 @@
     </div>
 </div>
 {% endfor %}
-
+</div>
 {% endblock %}

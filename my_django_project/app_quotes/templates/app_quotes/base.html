@@ -14,7 +14,7 @@
     <div>
         <nav class="navbar navbar-dark bg-dark">
           <div class="container-fluid">
-            <a class="navbar-brand" href="{% url 'app_quotes:quotes' %}">GreatMinds - for U.</a>
+            <a class="navbar-brand" href="{% url 'app_quotes:main' %}">GreatMinds - for U.</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar">
               <span class="navbar-toggler-icon"></span>
             </button>
@@ -30,13 +30,18 @@
                   </li>
                   <li class="nav-item">
                     <a class="nav-link" href="{% url 'app_quotes:authors' %}">ALL AUTHORS IN DATABASE</a>
+                    <a class="nav-link" href="{% url 'app_quotes:quotes' %}">ALL QUOTES IN DATABASE</a>
+                    <a class="btn btn-outline-primary" href="{% url 'app_users:signup' %}" role="button">Sign Up</a>
+                    <a class="btn btn-outline-primary" href="{% url 'app_users:login' %}" role="button">Login</a>
+                    <a class="btn btn-outline-primary" href="{% url 'app_users:logout' %}" role="button">Logout</a>
                   </li>
+
                   <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                      Dropdown
+                      ACTIONS WITH QUOTES
                     </a>
                     <ul class="dropdown-menu dropdown-menu-dark">
-                      <li><a class="dropdown-item" href="#">Action</a></li>
+                      <li><a class="dropdown-item" href="{% url 'app_quotes:add_quote' %}">ADD QUOTE</a></li>
                       <li><a class="dropdown-item" href="#">Another action</a></li>
                       <li>
                         <hr class="dropdown-divider">
@@ -57,13 +62,14 @@
     </header>
 
     <main>
-        <div class="d-flex align-content-stretch flex-wrap">
+
+
 
             {% block content %}
             {% endblock %}
 
 
-        </div>
+
     </main>
 
     <footer>
