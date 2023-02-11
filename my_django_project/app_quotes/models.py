@@ -19,7 +19,7 @@ class Authors(models.Model):
 
 class Quotes(models.Model):
     tags = ArrayField(ArrayField(models.CharField(max_length=100, blank=True), size=15), size=15, default=['No tags!'])
-    author = models.ForeignKey(Authors, on_delete=models.CASCADE, to_field='fullname', default='!No autor yet!')
+    author = models.ForeignKey(Authors, on_delete=models.CASCADE, to_field='fullname')
     quote = models.CharField(max_length=5000)
     user = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
 

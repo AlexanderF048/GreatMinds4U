@@ -41,20 +41,14 @@ def def_tag_clic(request, recived_tag):
 def def_add_quote(request):
     if request.method == 'POST':
         data_form = FormQuote(request.POST)
-
         if data_form.is_valid():
-
             try:
-                check_auth = Quotes.objects.get(fullname=request.POST.author)
-                print(check_auth)
+                check_auth = Authors.objects.get(fullname=request.POST['author'])
                 new_quote = data_form.save()
-                print("Base quote saved")
-
-
-            except (KeyError, Authors.fullname.DoesNotExist):
-                Authors(fullname=request.POST.author).save()
+            except (KeyError, AttributeError):
+                Authors(fullname=request.POST['author']).save()
                 print('new autor created')
-                data_form.add(author=request.POST.author)
+                data_form.add(author=request.POST['author'])
                 new_quote = data_form.save()
                 print("Base quote saved")
 
