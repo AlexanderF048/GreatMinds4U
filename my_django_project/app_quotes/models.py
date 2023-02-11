@@ -7,9 +7,9 @@ from django.contrib.auth.models import User
 
 class Authors(models.Model):
     fullname = models.CharField(max_length=50, primary_key=True)
-    born_date = models.CharField(max_length=50)
-    born_location = models.CharField(max_length=250)
-    description = models.CharField(max_length=5000)
+    born_date = models.CharField(max_length=50, default='No born data.')
+    born_location = models.CharField(max_length=250, default='No born data.')
+    description = models.CharField(max_length=5000, default='No description.')
     user = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
 
 
@@ -18,8 +18,8 @@ class Authors(models.Model):
 
 
 class Quotes(models.Model):
-    tags = ArrayField(ArrayField(models.CharField(max_length=100, blank=True), size=15), size=15)
-    author = models.ForeignKey(Authors, on_delete=models.CASCADE, to_field='fullname')
+    tags = ArrayField(ArrayField(models.CharField(max_length=100, blank=True), size=15), size=15, default=['No tags!'])
+    author = models.ForeignKey(Authors, on_delete=models.CASCADE, to_field='fullname', default='!No autor yet!')
     quote = models.CharField(max_length=5000)
     user = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
 

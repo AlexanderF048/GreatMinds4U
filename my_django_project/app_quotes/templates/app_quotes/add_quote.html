@@ -5,7 +5,7 @@
 <div class="container">
 
 
-<form method="POST" action="{% url 'app_quotes:add_quote'%}">
+<form method="POST" action="{% url 'app_quotes:add_quote'%}" class="mb-3">
     {% csrf_token %}
     <div style="padding: 10px">
         <label>Enter tags one or several, trough the come:{{form.tags}}</label>

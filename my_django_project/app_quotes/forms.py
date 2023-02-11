@@ -14,5 +14,5 @@ class FormQuote(ModelForm):
 
     class Meta:
         model = Quotes
-        fields = ['tags', 'author', 'quote', 'user']
+        fields = ['quote']
         exclude = ['tags', 'author'] #так как это связь многие-ко-многим и мы ее будем обрабатывать особым способом.

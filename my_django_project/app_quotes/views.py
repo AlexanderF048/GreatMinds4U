@@ -43,16 +43,21 @@ def def_add_quote(request):
         data_form = FormQuote(request.POST)
 
         if data_form.is_valid():
-            new_quote = data_form.save()
-            new_quote.author.add(data_form.author)
 
+            try:
+                check_auth = Quotes.objects.get(fullname=request.POST.author)
 
+            except Quotes.DoesNotExist:
+                Authors(fullname=request.POST.author).save()
+                new_quote = data_form.save()
 
             parce_tags = data_form.tags.split(",", 3)
+            print(parce_tags)
             new_quote.tags.add(parce_tags)
+            print('tags saved')
 
             return redirect(to='app_quotes:main')
         else:
-            return render(request, 'app_quotes/add_quote.html', {'form': data_form})
+            return render(request, 'app_quotes/failure.html')
 
     return render(request, 'app_quotes/add_quote.html', {'form': FormQuote()})
