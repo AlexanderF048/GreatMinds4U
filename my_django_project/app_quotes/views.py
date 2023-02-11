@@ -46,16 +46,23 @@ def def_add_quote(request):
 
             try:
                 check_auth = Quotes.objects.get(fullname=request.POST.author)
-
-            except Quotes.DoesNotExist:
-                Authors(fullname=request.POST.author).save()
+                print(check_auth)
                 new_quote = data_form.save()
+                print("Base quote saved")
 
-            parce_tags = data_form.tags.split(",", 3)
-            print(parce_tags)
-            new_quote.tags.add(parce_tags)
-            print('tags saved')
 
+            except (KeyError, Authors.fullname.DoesNotExist):
+                Authors(fullname=request.POST.author).save()
+                print('new autor created')
+                data_form.add(author=request.POST.author)
+                new_quote = data_form.save()
+                print("Base quote saved")
+
+            # parce_tags = data_form.tags.split(",", 3)
+            # print(parce_tags)
+            # new_quote.tags.add(parce_tags)
+            # print('tags saved')
+            #
             return redirect(to='app_quotes:main')
         else:
             return render(request, 'app_quotes/failure.html')
