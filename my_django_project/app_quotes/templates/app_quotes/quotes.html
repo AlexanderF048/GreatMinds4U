@@ -8,7 +8,7 @@
 </div>
 
 <div class="d-flex flex-column grid gap-5">
-{% for quote in quotes_db %}
+{% for quote in page_object %}
 
     <div class="card">
       <h5 class="card-header">&#128173;</h5>
@@ -17,13 +17,33 @@
         <p class="card-text">{{quote.quote}}</p>
         {% for tag in quote.tags %}
             <a class="btn btn-outline-primary" href="{% url 'app_quotes:quote_s' recived_tag=tag %}" role="button">{{tag}}</a>
-
         {% endfor %}
-
-
       </div>
     </div>
 
 {% endfor %}
-</div>
+
+
+    <nav aria-label="Page navigation example">
+      <ul class="pagination">
+
+       {% if page_object.has_previous %}
+          <li class="page-item"><a class="page-link" href="?page=1">&laquo First</a></li>
+          <li class="page-item"><a class="page-link" href="?page={{page_object.previous_page_number}}">&laquo Previous</a></li>
+       {% endif %}
+
+           <li class="page-item active" aria-current="page">
+           <span class="page-link">{{page_object.number}}</span>
+           </li>
+
+
+
+       {% if page_object.has_next %}
+          <li class="page-item"><a class="page-link" href="?page={{page_object.next_page_number}}">Next</a></li>
+          <li class="page-item"><a class="page-link" href="?page={{page_object.paginator.num_pages}}">&raquo Last</a></li>
+       {% endif %}
+
+      </ul>
+    </nav>
+
 {% endblock %}
