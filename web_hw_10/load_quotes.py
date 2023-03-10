@@ -5,7 +5,7 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import Column, String, Integer, Text, ForeignKey, ARRAY
 import json
 
-url_to_db = f'postgresql://postgres:123456@localhost:5432/postgres'
+url_to_db = f'postgresql://postgres:567234@localhost:5432/postgres'
 
 engine = create_engine(url_to_db, echo=True, pool_size=5)
 DBSession = sessionmaker(bind=engine)
@@ -59,7 +59,7 @@ def upload_quotes():
             session.add(
                 Quotes_alchemy(
                     tags=quote['tags'],
-                    author_id='Alexandre Dumas-fils',
+                        author_id='Alexandre Dumas-fils',
                     quote=quote['quote']
 
                 )
@@ -78,6 +78,6 @@ def upload_quotes():
 
 # --------------------------------------------------------------------
 if __name__ == "__main__":
-    # upload_authors()
-    upload_quotes()
+    upload_authors()
+    #upload_quotes()
     session.commit()

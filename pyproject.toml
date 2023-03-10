@@ -12,6 +12,7 @@ django = "^4.1.6"
 psycopg2 = "^2.9.5"
 sqlalchemy = "^2.0.1"
 pillow = "^9.4.0"
+django-environ = "^0.10.0"
 
 
 [build-system]
