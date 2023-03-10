@@ -58,6 +58,7 @@ def def_add_quote(request):
                 new_quote = data_form.save(commit=False)
                 new_quote.author = check_auth
                 new_quote.tags = [tag.strip() for tag in tags_list]
+                new_quote.user = request.user   #############New for adding user
                 new_quote.save()
 
             except Authors.DoesNotExist:
@@ -66,6 +67,7 @@ def def_add_quote(request):
                 new_quote = data_form.save(commit=False)
                 new_quote.author = Authors.objects.get(fullname=request.POST.get('author'))
                 new_quote.tags = [tag.strip() for tag in tags_list]
+                new_quote.user = request.user  #############New for adding user
                 new_quote.save()
 
             return redirect(to='app_quotes:main')

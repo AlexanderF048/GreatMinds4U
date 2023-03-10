@@ -31,12 +31,14 @@ class Authors_alchemy(Base):
     description = Column()
 
 
+
 class Quotes_alchemy(Base):
     __tablename__ = 'app_quotes_quotes'
     id = Column(Integer, primary_key=True, autoincrement=True)
     tags = Column(ARRAY(String))
     author_id = Column()
     quote = Column()
+    user_id = Column(Integer, default=1)#########
 
 
 def upload_authors():
@@ -78,6 +80,6 @@ def upload_quotes():
 
 # --------------------------------------------------------------------
 if __name__ == "__main__":
-    upload_authors()
-    #upload_quotes()
+    #upload_authors()
+    upload_quotes()
     session.commit()
